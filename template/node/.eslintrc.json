@@ -1,4 +1,0 @@
-{
-  "extends": "@heewon.dev/eslint-config",
-  "root": true
-}
