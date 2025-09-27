@@ -1,0 +1,30 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# heewon.dev 아키텍처 핵심 원칙
+
+## Clean Architecture + DDD 패턴 준수
+- 의존성 방향은 항상 안쪽(Domain)으로 향해야 함
+- Domain Layer는 외부 의존성 없이 순수 비즈니스 로직만 포함  
+- Repository 패턴을 통한 데이터 접근 추상화
+
+## 모노레포 패키지 구조
+- `apps/`: 애플리케이션 진입점들
+- `libs/`: 재사용 가능한 라이브러리들
+- 패키지 명명 규칙: `@heewon.dev/{domain}-{layer}`
+
+## 계층별 의존성 관리
+- **클라이언트**: Apps → Shells → Features → UI System
+- **서버**: Service → Domain → Datasource
+- 상위 레이어는 하위 레이어만 참조 가능
+- 같은 레이어끼리는 참조 금지
+- 공통 유틸리티는 libs/shared에 위치
+
+## 새 기능 개발 순서
+1. Domain Layer 설계 (Entity, Repository Interface)
+2. Service Layer 구현 (UseCase, Controller)  
+3. Datasource Layer 구현 (Repository 구현체)
+4. Feature Component 개발
+5. Shell에서 조합

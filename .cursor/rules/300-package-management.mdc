@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 📦 패키지 관리 규칙
+
+## 새 패키지 생성 시
+- `@heewon.dev/{domain}-{layer}` 명명 규칙 준수
+- workspace:* 프로토콜로 내부 패키지 참조
+- 각 패키지는 독립적으로 빌드/테스트 가능해야 함
+
+## 의존성 관리
+- 상위 레이어는 하위 레이어만 참조 가능
+- 같은 레이어끼리는 참조 금지
+- 공통 유틸리티는 libs/shared에 위치
+
+## 패키지 구조 예시
+```
+@heewon.dev/knowledge-service      # Service Layer
+@heewon.dev/knowledge-domain       # Domain Layer  
+@heewon.dev/knowledge-datasource   # Datasource Layer
+@heewon.dev/marketing-shells     # Shells Layer
+@heewon.dev/marketing-features-main  # Features Layer
+@heewon.dev/ui-system           # UI System Layer
+```
+
+## workspace 설정
+- pnpm workspace 사용
+- 모든 내부 패키지는 workspace:* 참조
+- 외부 의존성은 정확한 버전 명시
+
+## 빌드 및 배포
+- Turbo를 통한 모노레포 빌드 최적화
+- 각 패키지별 독립적 테스트 가능
+- 의존성 그래프 기반 빌드 순서 관리

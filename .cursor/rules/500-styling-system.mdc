@@ -1,0 +1,94 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 🎨 스타일링 시스템 규칙
+
+## 계층별 스타일링 권한
+- **UI System Layer만**: 스타일링 관련 모든 작업 허용
+- **Features/Shells Layer**: 스타일링 완전 금지, ui-system 컴포넌트만 사용
+- **Apps Layer**: 전역 스타일시트(globals.css)만 허용
+
+## Panda CSS 사용 (UI System에서만)
+- css() 함수나 styled-system 패턴 활용
+- Shadow Panda preset 기반 컴포넌트 작성
+- **Tailwind 클래스 사용 금지**
+- @heewon.dev/utils-styled-system 통한 공통 스타일 관리
+
+## 테마 시스템
+- Design Token 기반 일관된 스타일링
+- 반응형 디자인은 Panda의 breakpoint 활용
+- utils-styled-system을 통한 공통 스타일 관리
+- 컬러, 타이포그래피, 스페이싱 시스템 일관성 유지
+
+## UI System Layer에서의 컴포넌트 스타일링
+```typescript
+// UI System에서만 허용 - Panda CSS
+import { css } from '@heewon.dev/utils-styled-system'
+
+const buttonStyle = css({
+  px: 4,
+  py: 2,
+  bg: 'blue.500',
+  color: 'white'
+})
+
+// UI System에서만 허용 - styled-system 패턴
+import { styled } from '@heewon.dev/utils-styled-system'
+
+const Button = styled('button', {
+  base: {
+    px: 4,
+    py: 2
+  },
+  variants: {
+    size: {
+      sm: { px: 2, py: 1 },
+      md: { px: 4, py: 2 }
+    }
+  }
+})
+```
+
+## Features/Shells Layer에서의 올바른 사용법
+```typescript
+// 올바른 방법 - UI System 컴포넌트만 사용
+import { Button, Card, Text } from '@heewon.dev/ui-system'
+
+export const LoginForm = () => {
+  return (
+    <Card>
+      <Text variant="heading">로그인</Text>
+      <Button size="md" variant="primary">
+        로그인
+      </Button>
+    </Card>
+  )
+}
+
+// 금지 - Features/Shells에서 직접 스타일링
+import { css } from '@heewon.dev/utils-styled-system' // ❌ 금지
+import { styled } from '@heewon.dev/utils-styled-system' // ❌ 금지
+
+const customStyle = css({ ... }) // ❌ 금지
+const StyledDiv = styled('div', { ... }) // ❌ 금지
+```
+
+## 전체 계층 금지사항
+- Tailwind 클래스 직접 사용 금지
+- 인라인 스타일 최소화
+- !important 사용 금지
+- 하드코딩된 색상값 사용 금지
+
+## Features/Shells Layer 추가 금지사항
+- css() 함수 import 및 사용 금지
+- styled() 함수 import 및 사용 금지
+- utils-styled-system 패키지 직접 import 금지
+- 모든 스타일 관련 라이브러리 직접 사용 금지
+
+## UI 컴포넌트 개발 원칙
+- **UI System**: Radix UI 기반 접근성 보장된 컴포넌트 생성
+- **Features/Shells**: @heewon.dev/ui-system 컴포넌트만 사용
+- **새로운 스타일 필요시**: ui-system에 컴포넌트 추가 후 사용
+- **스타일 수정 필요시**: ui-system 컴포넌트의 variant나 props로 해결

@@ -1,0 +1,43 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 🚀 서버 개발 규칙
+
+## 계층 구조 (Service → Domain → Datasource)
+- **Service**: UseCase + Controller, 외부 인터페이스 제공
+- **Domain**: Entity + Repository Interface, 순수 비즈니스 로직
+- **Datasource**: Repository 구현체, 데이터 접근
+
+## 기술 스택
+- **API**: Express + type-graphql + class-validator
+- **Database**: Drizzle ORM + Drizzle Kit
+- **DI**: TypeDI 컨테이너 사용
+- **Deployment**: Serverless Framework + AWS Lambda
+
+## Domain Layer 규칙
+- Entity는 비즈니스 규칙과 불변성 보장
+- Repository는 인터페이스만 정의, 구현체는 Datasource에
+- 외부 라이브러리 의존성 최소화 (TypeDI 제외)
+- 순수 비즈니스 로직만 포함
+
+## Service Layer 규칙
+- UseCase는 단일 책임 원칙 준수
+- Controller는 HTTP 관심사만 처리
+- type-graphql decorators 활용한 GraphQL 스키마 정의
+- 비즈니스 로직 조합 및 트랜잭션 관리
+
+## Datasource Layer 규칙
+- Drizzle ORM을 통한 타입 안전한 DB 접근
+- Repository 인터페이스 구현
+- 외부 API 호출 로직 포함
+- 데이터 변환 및 매핑 로직
+
+## 패키지 구조
+```
+libs/{domain}/
+├── service/        # @heewon.dev/{domain}-service
+├── domain/         # @heewon.dev/{domain}-domain
+└── datasource/     # @heewon.dev/{domain}-datasource
+```

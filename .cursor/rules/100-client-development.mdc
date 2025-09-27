@@ -1,0 +1,51 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 📱 클라이언트 개발 규칙
+
+## 계층 구조 (Apps → Shells → Features → UI System)
+- **Apps**: 라우팅, 전역 설정만 담당
+- **Shells**: 페이지/모달/포털 컨테이너, Features 조합  
+- **Features**: 도메인별 비즈니스 로직 컴포넌트
+- **UI System**: Radix UI 기반 공통 컴포넌트
+
+## 기술 스택
+- **Framework**: Next.js 15 + React 19 + TypeScript
+- **Styling**: Panda CSS + Shadow Panda 사용 (Tailwind 사용 금지)
+- **UI Components**: @radix-ui/react-* + @heewon.dev/ui-system
+- **State**: React hooks, 복잡한 상태는 컨텍스트 활용
+
+## 컴포넌트 작성 규칙
+- 함수형 컴포넌트 + TypeScript 사용
+- Props 인터페이스는 컴포넌트 상단에 정의
+- **Features와 Shells에서는 css(), styled 함수 직접 사용 금지**
+- **모든 스타일링된 컴포넌트는 ui-system에서 생성 후 사용**
+- @heewon.dev/ui-system 컴포넌트만 import하여 사용
+
+## 파일 구조
+```
+src/
+├── components/     # 해당 패키지 전용 컴포넌트 (스타일링 없이 로직만)
+├── hooks/         # 커스텀 훅들
+├── types/         # 타입 정의
+└── index.ts       # export 집합
+```
+
+## 스타일링 계층 분리 원칙
+- **UI System Layer**: 모든 스타일링된 컴포넌트 생성
+  - css() 함수, styled-system 패턴 사용 허용
+  - Design Token 기반 스타일링
+  - Variant 및 조건부 스타일링 구현
+- **Features/Shells Layer**: 스타일링 금지
+  - @heewon.dev/ui-system 컴포넌트만 사용
+  - 비즈니스 로직과 컴포넌트 조합에만 집중
+  - css(), styled 함수 import 및 사용 금지
+
+## 스타일링 규칙
+- **UI System에서만**: css() 함수나 styled-system 패턴 활용
+- **UI System에서만**: Shadow Panda preset 기반 컴포넌트 작성
+- **모든 레이어**: Tailwind 클래스 사용 금지
+- **모든 레이어**: Design Token 기반 일관된 스타일링
+- **Features/Shells**: utils-styled-system 직접 import 금지
