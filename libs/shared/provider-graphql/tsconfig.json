@@ -1,0 +1,5 @@
+{
+  "exclude": ["node_modules"],
+  "extends": "@heewon.dev/utils-tsconfig/tsconfig.node.json",
+  "include": ["src/**/*.ts"]
+}

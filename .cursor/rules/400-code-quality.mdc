@@ -1,7 +1,6 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: 가독성 우선 원칙, TypeScript 작성 규칙, 에러 처리, 테스트 작성 원칙
+alwaysApply: false
 ---
 # 🔧 코드 품질 및 개발 도구 규칙
 

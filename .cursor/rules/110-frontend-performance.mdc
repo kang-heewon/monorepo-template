@@ -1,7 +1,6 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: React 렌더링 최적화, Hook 패턴, Context 성능, 메모리 누수 방지 등 프론트엔드 성능 규칙
+alwaysApply: false
 ---
 # ⚡ 프론트엔드 코드 퍼포먼스 최적화 규칙
 
@@ -157,6 +156,24 @@ const processData = (data: LargeDataObject) => {
 - **취소 가능한 요청**: AbortController로 불필요한 요청 취소
 - **낙관적 업데이트**: UI 반응성을 위한 즉시 상태 업데이트
 - **배치 요청**: 여러 API 호출을 하나로 묶어서 처리
+
+## Apollo Client useQuery 최적화
+- **variables 참조 안정성 필수**: useQuery의 variables가 매 렌더링마다 새로운 객체/값을 갖지 않도록 useMemo 활용
+```typescript
+// Don't - getDateRange가 매 렌더링마다 호출되어 새로운 endDate 생성 → 무한 쿼리 루프
+const { startDate, endDate } = getDateRange(period);
+const { data } = useQuery(Query, {
+  variables: { startDate, endDate },
+});
+
+// Do - period가 변경될 때만 date range 재계산
+const { startDate, endDate } = useMemo(() => getDateRange(period), [period]);
+const { data } = useQuery(Query, {
+  variables: { startDate, endDate },
+});
+```
+- **Date, 객체, 배열 variables 주의**: `new Date().toISOString()` 같은 표현식이 variables에 직접 들어가면 매 렌더링마다 쿼리 재실행
+- **skip 옵션 활용**: 조건이 충족되지 않으면 쿼리 실행 방지
 
 ## 문자열 및 계산 최적화
 - **템플릿 리터럴 vs 연결**: 정적 문자열은 연결, 동적은 템플릿 리터럴

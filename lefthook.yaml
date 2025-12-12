@@ -1,5 +1,6 @@
 pre-commit:
   parallel: true
+  stage_fixed: true
   commands:
     ts:
       glob: "*.ts"
@@ -19,6 +20,13 @@ pre-commit:
     json:
       glob: "*.json"
       run: pnpm eslint --fix --quiet {staged_files}
+
+pre-push:
+  commands:
+    test:
+      run: pnpm test
+    typecheck:
+      run: pnpm typecheck
 
 post-merge:
   commands:

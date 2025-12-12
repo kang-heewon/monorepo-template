@@ -4,18 +4,29 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "codegen": "turbo codegen",
+    "deploy": "turbo deploy",
     "dev": "turbo dev",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo lint",
-    "prepare": "lefthook install"
+    "migrate:dev": "drizzle-kit migrate --config=migrations/drizzle-dev.config.ts",
+    "migrate:generate": "drizzle-kit generate --config=migrations/drizzle.config.ts",
+    "migrate:prod": "drizzle-kit migrate --config=migrations/drizzle-prod.config.ts",
+    "prepare": "lefthook install",
+    "prod": "turbo prod",
+    "test": "turbo test",
+    "typecheck": "turbo typecheck"
   },
   "devDependencies": {
     "@heewon.dev/eslint-config": "workspace:*",
     "@heewon.dev/utils-tsconfig": "workspace:*",
-    "eslint": "9.35.0",
-    "lefthook": "1.13.1",
+    "@types/node": "^22",
+    "@vitest/coverage-v8": "4.0.15",
+    "drizzle-kit": "0.31.8",
+    "eslint": "9.39.1",
+    "lefthook": "2.0.9",
     "turbo": "latest",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3",
+    "vitest": "4.0.15"
   },
   "packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a",
   "engines": {

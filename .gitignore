@@ -40,3 +40,7 @@ yarn-error.log*
 .idea
 !.idea/jsLinters/
 !.idea/jsLinters/eslint.xml
+
+
+.cursor/plan
+.claude/settings.local.json

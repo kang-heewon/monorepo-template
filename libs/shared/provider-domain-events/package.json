@@ -1,0 +1,19 @@
+{
+  "name": "@heewon.dev/provider-domain-events",
+  "version": "0.0.0",
+  "type": "commonjs",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint **/*.ts*",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@croco/events-core": "0.0.2",
+    "@croco/events-inmemory": "0.0.1"
+  },
+  "devDependencies": {
+    "@heewon.dev/eslint-config": "workspace:*",
+    "@heewon.dev/utils-tsconfig": "workspace:*"
+  }
+}

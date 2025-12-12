@@ -1,7 +1,6 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: 알고리즘 복잡도, 비동기 처리, DB 쿼리, 캐싱 등 백엔드 성능 최적화 규칙
+alwaysApply: false
 ---
 # ⚡ 백엔드 코드 퍼포먼스 최적화 규칙
 

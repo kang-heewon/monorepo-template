@@ -1,0 +1,5 @@
+{
+  "exclude": ["node_modules", "dist"],
+  "extends": "@heewon.dev/utils-tsconfig/tsconfig.base.json",
+  "include": ["src/**/*"]
+}

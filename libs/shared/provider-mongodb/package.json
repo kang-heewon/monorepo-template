@@ -1,0 +1,20 @@
+{
+  "name": "@heewon.dev/provider-mongodb",
+  "version": "0.0.0",
+  "type": "commonjs",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint **/*.ts*",
+    "test": "echo 1",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "mongodb": "6.16.0",
+    "typedi": "0.10.0"
+  },
+  "devDependencies": {
+    "@heewon.dev/eslint-config": "workspace:*",
+    "@heewon.dev/utils-tsconfig": "workspace:*"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@heewon.dev/ui/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules"],
+  "extends": "@heewon.dev/utils-tsconfig/tsconfig.react.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

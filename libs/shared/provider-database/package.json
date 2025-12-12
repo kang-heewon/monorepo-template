@@ -1,0 +1,21 @@
+{
+  "name": "@heewon.dev/provider-database",
+  "version": "0.0.0",
+  "type": "commonjs",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint **/*.ts*",
+    "test": "echo 1",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "drizzle-orm": "0.44.7",
+    "postgres": "3.4.5",
+    "typedi": "0.10.0"
+  },
+  "devDependencies": {
+    "@heewon.dev/eslint-config": "workspace:*",
+    "@heewon.dev/utils-tsconfig": "workspace:*"
+  }
+}

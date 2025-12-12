@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "aliases": {
+    "components": "@heewon.dev/ui/components",
+    "hooks": "@heewon.dev/ui/hooks",
+    "lib": "@heewon.dev/ui/lib",
+    "ui": "@heewon.dev/ui/components",
+    "utils": "@heewon.dev/ui/lib/utils"
+  },
+  "iconLibrary": "lucide",
+  "rsc": true,
+  "style": "new-york",
+  "tailwind": {
+    "baseColor": "neutral",
+    "config": "",
+    "css": "src/styles/globals.css",
+    "cssVariables": true
+  },
+  "tsx": true
+}

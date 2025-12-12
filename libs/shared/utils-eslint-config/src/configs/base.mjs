@@ -6,6 +6,10 @@ import prettier from 'eslint-plugin-prettier';
 import jsoncParser from 'jsonc-eslint-parser';
 import tseslint from 'typescript-eslint';
 
+import noCrossDomainImportPlugin from '../rules/no-cross-domain-import.mjs';
+import noDatasourceImportPlugin from '../rules/no-datasource-import.mjs';
+import typeGraphqlPlugin from '../rules/type-graphql-explicit-type.mjs';
+
 const base = [
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -19,8 +23,18 @@ const base = [
     plugins: {
       prettier,
       'import-x': importX,
+      'type-graphql': typeGraphqlPlugin,
+      'slackbase-architecture': {
+        rules: {
+          ...noCrossDomainImportPlugin.rules,
+          ...noDatasourceImportPlugin.rules,
+        },
+      },
     },
     rules: {
+      'slackbase-architecture/no-cross-domain-import': 'error',
+      'slackbase-architecture/no-datasource-import': 'error',
+
       'prettier/prettier': [
         'error',
         {
@@ -53,6 +67,8 @@ const base = [
       'import-x/prefer-default-export': 'off',
 
       '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'no-type-imports' }],
+
+      'type-graphql/explicit-type': 'error',
     },
     settings: {
       'import-x/parsers': {
