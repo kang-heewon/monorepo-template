@@ -65,8 +65,8 @@ Service (UseCase + GraphQL Resolver)
 ### 클라이언트 레이어
 ```
 Apps (라우팅 + Provider)
-  └── Shells (레이아웃 조립 + UX Boundary)  ← apps 내부에 위치
-        └── Features (비즈니스 로직 + GraphQL)
+  └── Shells (*Page, *Layout - Feature 조립 + UX Boundary)
+        └── Features (비즈니스 로직 + GraphQL, MVVM 패턴)
               └── UI (프레젠테이션)
                     └── @heewon.dev/ui (공통 UI 라이브러리)
 ```
@@ -112,9 +112,10 @@ Apps (라우팅 + Provider)
 ### 클라이언트 레이어
 | 유형 | 위치 | 역할 |
 |------|------|------|
-| Shell | `apps/*/src/shells/` | 레이아웃 조립, UX Boundary |
+| 공용 Shell | `apps/*/src/shells/` | 전역 레이아웃 조립 (GlobalLayout 등) |
+| 도메인 Shell | `libs/{domain}/shell` | 도메인별 `*Page`, `*Layout` 컴포넌트 (flat 구조) |
 | 전역 Feature | `libs/shared/feature-*` | 도메인 비종속 스마트 컴포넌트 |
-| 도메인 Feature | `libs/{domain}/feature` | 도메인 특화 비즈니스 로직 |
+| 도메인 Feature | `libs/{domain}/feature` | 도메인 특화 비즈니스 로직 (MVVM 패턴) |
 | 도메인 UI | `libs/{domain}/ui` | 도메인 특화 프레젠테이션 |
 | 공통 UI | `libs/shared/ui` | shadcn/ui 기반 공통 컴포넌트 |
 
@@ -129,9 +130,9 @@ Apps (라우팅 + Provider)
 2. **클라이언트 레이어**:
    - UI Layer: 도메인 특화 프레젠테이션 컴포넌트
    - Feature Layer: 비즈니스 로직 + GraphQL 연동 (MVVM 패턴)
-   - Shell Layer: `apps/*/src/shells/`에 레이아웃 조립
+   - Shell Layer: `libs/{domain}/shell`에 `*Page`, `*Layout` 컴포넌트 (flat 구조)
 
-3. **Apps에서 통합**: Shell을 layout.tsx에서 사용
+3. **Apps에서 통합**: Shell의 `*Page` 컴포넌트를 page.tsx에서 사용
 
 ## 전역 기능 vs 도메인 기능
 

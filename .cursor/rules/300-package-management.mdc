@@ -53,7 +53,7 @@ export { UserRepositoryToken } from './libs/repositories/UserRepository';
 ## 의존성 관리
 
 ### 클라이언트 레이어 의존성
-- **Shell** (apps 내부): shared/feature-*, {domain}/feature, @heewon.dev/ui
+- **Shell** (`libs/{domain}/shell`): {domain}/feature, shared/feature-*, @heewon.dev/ui
 - **Feature**: ui, @heewon.dev/ui, Apollo Client, provider-graphql, utils-mvvm
 - **UI**: @heewon.dev/ui만 의존
 
@@ -91,9 +91,12 @@ export { UserRepositoryToken } from './libs/repositories/UserRepository';
 @heewon.dev/utils-form            # Form 관련 유틸
 @heewon.dev/provider-graphql      # GraphQL codegen 타입
 
-# Shell은 패키지가 아닌 apps 내부에 위치
+# 도메인 Shell (별도 패키지)
+@heewon.dev/workspace-shell        # WorkspaceLayout, ProjectListPage 등
+@heewon.dev/project-shell          # ProjectDetailPage 등
+
+# 공용 Shell (apps 내부)
 apps/console-web/src/shells/         # GlobalLayout 등
-apps/admin-web/src/shells/
 ```
 
 ## 패키지 위치 정리
@@ -103,7 +106,8 @@ apps/admin-web/src/shells/
 | 전역 Feature | `libs/shared/feature-*` | ✅ 별도 패키지 |
 | 도메인 Feature | `libs/{domain}/feature` | ✅ 별도 패키지 |
 | 도메인 UI | `libs/{domain}/ui` | ✅ 별도 패키지 |
-| Shell | `apps/*/src/shells/` | ❌ App 내부 |
+| 도메인 Shell | `libs/{domain}/shell` | ✅ 별도 패키지 (`*Page`, `*Layout`) |
+| 공용 Shell | `apps/*/src/shells/` | ❌ App 내부 |
 | 서버 레이어 | `libs/{domain}/{layer}` | ✅ 별도 패키지 |
 
 ## workspace 설정

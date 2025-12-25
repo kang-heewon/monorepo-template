@@ -52,20 +52,36 @@ export function GlobalLayout({ children }: { children: React.ReactNode }) {
 #### 도메인 Shell (`libs/{domain}/shell`)
 - **위치**: `libs/{domain}/shell` 패키지
 - **역할**:
-  - 도메인별 페이지/모달 레이아웃 조립
+  - 도메인별 페이지(`*Page`)/레이아웃(`*Layout`) 컴포넌트 제공
   - Feature 컴포넌트 조립
   - Suspense/ErrorBoundary 등 UX Boundary 전략 정의
 - **의존성**: `{domain}/feature`, `shared/feature-*`, `@heewon.dev/ui`
 - **금지**: 비즈니스 로직, GraphQL 호출, 직접적인 데이터 fetching
-- **예시**: `@heewon.dev/user-shell`, `@heewon.dev/portfolio-shell`
+- **네이밍 규칙**: Next.js 컨벤션과 일치
+  - `*Page` - 페이지 컴포넌트 (예: `ProjectListPage`, `CreateWorkspacePage`)
+  - `*Layout` - 레이아웃 컴포넌트 (예: `WorkspaceLayout`)
+- **폴더 구조**: flat (중첩 폴더 없이 `libs/` 바로 아래에 컴포넌트 배치)
+
+```
+libs/{domain}/shell/src/
+├── index.ts
+└── libs/
+    ├── WorkspaceLayout.tsx       # 레이아웃 컴포넌트
+    ├── CreateWorkspacePage.tsx   # 페이지 컴포넌트
+    ├── ProjectListPage.tsx
+    └── ProjectDetailPage.tsx
+```
 
 ```typescript
-// libs/user/shell/src/libs/create-workspace/CreateWorkspaceShell.tsx
+// libs/workspace/shell/src/libs/CreateWorkspacePage.tsx
 'use client';
 
-import { CreateWorkspaceForm } from '@heewon.dev/user-feature';
+import { CreateWorkspaceForm } from '@heewon.dev/workspace-feature';
+import { useRouter } from '@heewon.dev/utils-router';
 
-export function CreateWorkspaceShell() {
+export function CreateWorkspacePage() {
+  const router = useRouter();
+  
   return (
     <div className="flex min-h-screen items-center justify-center">
       <CreateWorkspaceForm onSuccess={() => router.push('/')} />

@@ -56,8 +56,8 @@ libs/                          # 재사용 가능한 라이브러리
 │   ├── service/              # GraphQL Resolvers, UseCase
 │   ├── domain/               # Entity, Repository Interface
 │   ├── datasource/           # Repository 구현체 (Drizzle ORM)
-│   ├── shell/                # 페이지/모달 컨테이너
-│   ├── feature/              # 비즈니스 로직 + GraphQL 연동
+│   ├── shell/                # *Page, *Layout 컴포넌트 (flat 구조)
+│   ├── feature/              # 비즈니스 로직 + GraphQL 연동 (MVVM 패턴)
 │   └── ui/                   # 도메인 특화 UI 컴포넌트
 └── shared/                    # 공통 유틸리티
     ├── ui/                   # shadcn/ui 기반 공통 UI 라이브러리
@@ -108,7 +108,7 @@ libs/                          # 재사용 가능한 라이브러리
 
 ### 계층별 역할
 - **Apps**: 라우팅, 전역 설정만 담당
-- **Shells**: 페이지/모달 레이아웃 및 Feature 조합 (비즈니스 로직 금지)
+- **Shells**: `*Page`, `*Layout` 컴포넌트로 Feature 조합 (flat 구조, 비즈니스 로직 금지)
 - **Features**: 비즈니스 로직 + GraphQL 연동 (MVVM 패턴: bind + hook)
 - **UI**: 도메인 특화 프레젠테이션 컴포넌트 (비즈니스 로직 금지)
 
