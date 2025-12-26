@@ -3,15 +3,40 @@
   "globalDependencies": ["**/.env.*local"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "codegen", "prepare"],
       "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "codegen": {
+      "cache": false,
+      "inputs": ["apps/graphql-api/schema.graphql"]
+    },
+    "deploy": {
+      "cache": false
     },
     "dev": {
       "cache": false,
+      "dependsOn": ["codegen", "prepare"],
       "persistent": true
     },
     "lint": {
       "dependsOn": ["^lint"]
+    },
+    "prepare": {
+      "cache": false,
+      "dependsOn": ["^prepare"]
+    },
+    "prod": {
+      "cache": false,
+      "dependsOn": ["prepare"],
+      "persistent": true
+    },
+    "test": {
+      "cache": true,
+      "dependsOn": ["^test"]
+    },
+    "typecheck": {
+      "cache": true,
+      "dependsOn": ["^typecheck"]
     }
   }
 }
