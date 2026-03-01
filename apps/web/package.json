@@ -1,0 +1,30 @@
+{
+  "name": "@heewon.dev/web",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@heewon.dev/ui": "workspace:*",
+    "@heewon.dev/utils-env": "workspace:*",
+    "next": "15.3.2",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@heewon.dev/eslint-config": "workspace:*",
+    "@heewon.dev/utils-tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "eslint": "catalog:",
+    "typescript": "catalog:"
+  }
+}
