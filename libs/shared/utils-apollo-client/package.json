@@ -20,6 +20,6 @@
     "@types/react": "^19.2.14"
   },
   "peerDependencies": {
-    "react": "^19"
+    "react": "catalog:"
   }
 }
