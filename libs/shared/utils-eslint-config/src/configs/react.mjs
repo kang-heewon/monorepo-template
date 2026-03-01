@@ -1,7 +1,13 @@
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default [
-  reactHooks.configs['recommended-latest'],
+  {
+    name: 'react-hooks',
+    plugins: {
+      'react-hooks': reactHooks,
+    },
+    rules: reactHooks.configs['recommended-latest'].rules,
+  },
   {
     rules: {
       'react-hooks/exhaustive-deps': ['warn', { enableDangerousAutofixThisMayCauseInfiniteLoops: true }],

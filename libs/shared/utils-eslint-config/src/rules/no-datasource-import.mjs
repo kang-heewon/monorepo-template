@@ -1,7 +1,11 @@
 const PROTECTED_LAYERS = ['domain', 'service'];
 
-function isDatasourceImport(importPath) {
-  return importPath.match(/^@slackbase\.org\/[a-z]+-datasource$/);
+function escapeForRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function isDatasourceImport(importPath, scope) {
+  return importPath.match(new RegExp(`^${escapeForRegExp(scope)}\/[a-z]+-datasource$`));
 }
 
 function getCurrentLayer(filename) {
@@ -20,19 +24,28 @@ const rule = {
       datasourceImport:
         "Datasource import not allowed in '{{layer}}' layer. Datasource should only be imported in apps or through DI container setup.",
     },
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          scope: { type: 'string' },
+        },
+        additionalProperties: false,
+      },
+    ],
   },
   create(context) {
+    const [{ scope } = {}] = context.options;
     const filename = context.filename || context.getFilename();
     const currentLayer = getCurrentLayer(filename);
 
-    if (!currentLayer || !PROTECTED_LAYERS.includes(currentLayer)) return {};
+    if (!scope || !currentLayer || !PROTECTED_LAYERS.includes(currentLayer)) return {};
 
     return {
       ImportDeclaration(node) {
         const importPath = node.source.value;
 
-        if (isDatasourceImport(importPath)) {
+        if (isDatasourceImport(importPath, scope)) {
           context.report({
             node,
             messageId: 'datasourceImport',

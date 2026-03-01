@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "mongodb": "6.16.0",
+    "mongodb": "^7.0.0",
     "typedi": "0.10.0"
   },
   "devDependencies": {

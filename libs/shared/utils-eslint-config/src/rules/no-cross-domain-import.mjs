@@ -1,22 +1,40 @@
-const DOMAINS = ['user', 'billing', 'kudos', 'wiki'];
+import fs from 'node:fs';
+import path from 'node:path';
+
 const LAYERS = ['domain', 'service', 'datasource', 'feature', 'shell', 'ui'];
 
-function extractPackageInfo(importPath) {
-  const match = importPath.match(/^@slackbase\.org\/([a-z]+)-([a-z]+)$/);
+let _domains = null;
+
+function getDomains(rootDir) {
+  if (_domains) return _domains;
+
+  _domains = fs
+    .readdirSync(path.join(rootDir, 'libs'))
+    .filter(domain => domain !== 'shared' && !domain.startsWith('.'));
+
+  return _domains;
+}
+
+function escapeForRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function extractPackageInfo(importPath, scope, domains) {
+  const match = importPath.match(new RegExp(`^${escapeForRegExp(scope)}\/([a-z]+)-([a-z]+)$`));
   if (!match) return null;
 
   const [, domain, layer] = match;
-  if (!DOMAINS.includes(domain) || !LAYERS.includes(layer)) return null;
+  if (!domains.includes(domain) || !LAYERS.includes(layer)) return null;
 
   return { domain, layer };
 }
 
-function getCurrentPackageInfo(filename) {
+function getCurrentPackageInfo(filename, domains) {
   const match = filename.match(/libs\/([a-z]+)\/([a-z]+)\//);
   if (!match) return null;
 
   const [, domain, layer] = match;
-  if (!DOMAINS.includes(domain) || !LAYERS.includes(layer)) return null;
+  if (!domains.includes(domain) || !LAYERS.includes(layer)) return null;
 
   return { domain, layer };
 }
@@ -31,18 +49,29 @@ const rule = {
       crossDomainImport:
         "Cross-domain import not allowed: '{{currentDomain}}-{{currentLayer}}' cannot import from '{{importDomain}}-{{importLayer}}'. Use domain events for cross-domain communication.",
     },
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          scope: { type: 'string' },
+          rootDir: { type: 'string' },
+        },
+        additionalProperties: false,
+      },
+    ],
   },
   create(context) {
+    const [{ scope, rootDir } = {}] = context.options;
     const filename = context.filename || context.getFilename();
-    const currentPackage = getCurrentPackageInfo(filename);
+    const domains = getDomains(rootDir || process.cwd());
+    const currentPackage = getCurrentPackageInfo(filename, domains);
 
-    if (!currentPackage) return {};
+    if (!scope || !currentPackage) return {};
 
     return {
       ImportDeclaration(node) {
         const importPath = node.source.value;
-        const importPackage = extractPackageInfo(importPath);
+        const importPackage = extractPackageInfo(importPath, scope, domains);
 
         if (!importPackage) return;
 

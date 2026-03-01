@@ -17,6 +17,9 @@ pre-commit:
     mdx:
       glob: "*.mdx"
       run: pnpm eslint --fix --quiet {staged_files}
+    prettier:
+      glob: "*.{ts,tsx,js,jsx,mdx}"
+      run: pnpm prettier --write {staged_files}
     json:
       glob: "*.json"
       run: pnpm eslint --fix --quiet {staged_files}

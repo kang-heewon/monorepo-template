@@ -43,4 +43,5 @@ yarn-error.log*
 
 
 .cursor/plan
+#SY|.sisyphus
 .claude/settings.local.json

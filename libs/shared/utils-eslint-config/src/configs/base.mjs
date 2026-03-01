@@ -1,30 +1,39 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import js from '@eslint/js';
 import importX from 'eslint-plugin-import-x';
 import jsonc from 'eslint-plugin-jsonc';
 import * as packageJson from 'eslint-plugin-package-json';
-import prettier from 'eslint-plugin-prettier';
-import jsoncParser from 'jsonc-eslint-parser';
+import prettierConfig from 'eslint-config-prettier';
+import * as jsoncParser from 'jsonc-eslint-parser';
 import tseslint from 'typescript-eslint';
 
 import noCrossDomainImportPlugin from '../rules/no-cross-domain-import.mjs';
 import noDatasourceImportPlugin from '../rules/no-datasource-import.mjs';
 import typeGraphqlPlugin from '../rules/type-graphql-explicit-type.mjs';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.resolve(__dirname, '../../../../../');
+
+const architectureScope = '@slackbase.org';
+
 const base = [
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  ...(Array.isArray(prettierConfig) ? prettierConfig : [prettierConfig]),
   {
     name: 'base:common',
     linterOptions: { reportUnusedDisableDirectives: true },
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: 2024,
       sourceType: 'module',
     },
     plugins: {
-      prettier,
       'import-x': importX,
       'type-graphql': typeGraphqlPlugin,
-      'slackbase-architecture': {
+      'monorepo-architecture': {
         rules: {
           ...noCrossDomainImportPlugin.rules,
           ...noDatasourceImportPlugin.rules,
@@ -32,19 +41,8 @@ const base = [
       },
     },
     rules: {
-      'slackbase-architecture/no-cross-domain-import': 'error',
-      'slackbase-architecture/no-datasource-import': 'error',
-
-      'prettier/prettier': [
-        'error',
-        {
-          trailingComma: 'es5',
-          singleQuote: true,
-          printWidth: 120,
-          arrowParens: 'avoid',
-          endOfLine: 'auto',
-        },
-      ],
+      'monorepo-architecture/no-cross-domain-import': ['error', { scope: architectureScope, rootDir: projectRoot }],
+      'monorepo-architecture/no-datasource-import': ['error', { scope: architectureScope }],
 
       'import-x/extensions': 'off',
       'import-x/no-cycle': 'error',
@@ -66,7 +64,7 @@ const base = [
       ],
       'import-x/prefer-default-export': 'off',
 
-      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'no-type-imports' }],
+      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
 
       'type-graphql/explicit-type': 'error',
     },
@@ -83,6 +81,7 @@ const base = [
     languageOptions: { parser: jsoncParser },
     plugins: { jsonc },
     rules: {
+      '@typescript-eslint/consistent-type-imports': 'off',
       'jsonc/sort-keys': ['error'],
     },
   },
@@ -93,6 +92,7 @@ const base = [
     languageOptions: { parser: jsoncParser },
     plugins: { 'package-json': packageJson },
     rules: {
+      '@typescript-eslint/consistent-type-imports': 'off',
       'jsonc/sort-keys': 'off',
       'package-json/sort-collections': 'error',
     },
