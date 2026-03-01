@@ -8,6 +8,9 @@
     "./node": "./src/configs/node.mjs",
     "./react": "./src/configs/react.mjs"
   },
+  "dependencies": {
+    "globals": "^16.5.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.3",
     "@next/eslint-plugin-next": "^16.1.0",

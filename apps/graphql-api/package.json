@@ -1,0 +1,27 @@
+{
+  "name": "@heewon.dev/graphql-api",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/main.ts",
+    "lint": "eslint . --max-warnings 0",
+    "start": "node dist/main.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.12.2",
+    "@heewon.dev/provider-graphql": "workspace:*",
+    "@heewon.dev/utils-env": "workspace:*",
+    "graphql": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@heewon.dev/eslint-config": "workspace:*",
+    "@heewon.dev/utils-tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "tsx": "^4.0.0",
+    "typescript": "catalog:"
+  }
+}
