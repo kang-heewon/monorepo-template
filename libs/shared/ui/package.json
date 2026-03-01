@@ -63,11 +63,11 @@
     "@types/react-dom": "^19.2.3"
   },
   "exports": {
-    "./globals.css": "./src/styles/globals.css",
-    "./postcss.config": "./postcss.config.mjs",
-    "./lib/*": "./src/libs/*.ts",
     "./components/*": "./src/components/*.tsx",
+    "./globals.css": "./src/styles/globals.css",
     "./hooks/*": "./src/hooks/*.ts",
-    "./icons": "./src/components/icons.tsx"
+    "./icons": "./src/components/icons.tsx",
+    "./lib/*": "./src/libs/*.ts",
+    "./postcss.config": "./postcss.config.mjs"
   }
 }
