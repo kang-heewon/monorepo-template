@@ -11,14 +11,14 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "6.0.0",
-    "@graphql-codegen/client-preset": "5.1.0",
-    "@graphql-codegen/typescript": "5.0.2",
+    "@graphql-codegen/cli": "6.1.2",
+    "@graphql-codegen/client-preset": "5.2.3",
+    "@graphql-codegen/typescript": "5.0.8",
     "@heewon.dev/eslint-config": "workspace:*",
     "@heewon.dev/utils-tsconfig": "workspace:*"
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "3.2.0",
-    "graphql": "16.11.0"
+    "graphql": "catalog:"
   }
 }

@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "drizzle-orm": "0.44.7",
+    "drizzle-orm": "catalog:",
     "postgres": "3.4.5",
     "typedi": "0.10.0"
   },

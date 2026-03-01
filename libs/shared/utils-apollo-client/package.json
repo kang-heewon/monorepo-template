@@ -10,14 +10,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@apollo/client": "4.0.7",
-    "@apollo/client-integration-nextjs": "0.13.2",
-    "graphql": "16.11.0"
+    "@apollo/client": "4.1.0",
+    "@apollo/client-integration-nextjs": "0.14.0",
+    "graphql": "catalog:"
   },
   "devDependencies": {
     "@heewon.dev/eslint-config": "workspace:*",
     "@heewon.dev/utils-tsconfig": "workspace:*",
-    "@types/react": "*"
+    "@types/react": "^19.2.14"
   },
   "peerDependencies": {
     "react": "^19"
