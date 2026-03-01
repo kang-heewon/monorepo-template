@@ -1,5 +1,5 @@
 {
-  "exclude": ["node_modules"],
-  "extends": "@heewon.dev/utils-tsconfig/tsconfig.react.json",
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "extends": "@heewon.dev/utils-tsconfig/tsconfig.base.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules"]
 }

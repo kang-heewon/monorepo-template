@@ -1,3 +1,2 @@
-import base from '@heewon.dev/eslint-config';
-
-export default [...base];
+import config from '@heewon.dev/eslint-config/node';
+export default config;
