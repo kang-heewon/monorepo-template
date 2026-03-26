@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@apollo/server": "^4.12.2",
+    "@apollo/server": "^5.5.0",
     "@heewon.dev/provider-graphql": "workspace:*",
     "@heewon.dev/utils-env": "workspace:*",
     "graphql": "catalog:",
