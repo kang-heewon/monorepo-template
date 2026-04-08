@@ -10,7 +10,7 @@ catalog:
   vitest: ^4.0.15
   tailwindcss: 4.2.0
   tailwind-merge: ^3.5.0
-  drizzle-orm: ^0.45.0
+  drizzle-orm: ^0.45.2
   zod: ^4.3.0
   graphql: 16.11.0
   "@types/node": ^25.0.0
