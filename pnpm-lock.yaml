@@ -10,8 +10,8 @@ catalogs:
       specifier: ^25.0.0
       version: 25.3.3
     drizzle-orm:
-      specifier: ^0.45.0
-      version: 0.45.1
+      specifier: ^0.45.2
+      version: 0.45.2
     eslint:
       specifier: ^10.0.2
       version: 10.0.2
@@ -162,7 +162,7 @@ importers:
     dependencies:
       drizzle-orm:
         specifier: 'catalog:'
-        version: 0.45.1(postgres@3.4.5)
+        version: 0.45.2(postgres@3.4.5)
       postgres:
         specifier: 3.4.5
         version: 3.4.5
@@ -3854,8 +3854,8 @@ packages:
     resolution: {integrity: sha512-O9EC/miwdnRDY10qRxM8P3Pg8hXe3LyU4ZipReKOgTwn4OqANmftj8XJz1UPUAS6NMHf0E2htjsbQujUTkncCg==}
     hasBin: true
 
-  drizzle-orm@0.45.1:
-    resolution: {integrity: sha512-Te0FOdKIistGNPMq2jscdqngBRfBpC8uMFVwqjf6gtTVJHIQ/dosgV/CLBU2N4ZJBsXL5savCba9b0YJskKdcA==}
+  drizzle-orm@0.45.2:
+    resolution: {integrity: sha512-kY0BSaTNYWnoDMVoyY8uxmyHjpJW1geOmBMdSSicKo9CIIWkSxMIj2rkeSR51b8KAPB7m+qysjuHme5nKP+E5Q==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=4'
@@ -9585,7 +9585,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.45.1(postgres@3.4.5):
+  drizzle-orm@0.45.2(postgres@3.4.5):
     optionalDependencies:
       postgres: 3.4.5
 
