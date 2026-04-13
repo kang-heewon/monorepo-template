@@ -13,7 +13,7 @@
   "dependencies": {
     "@heewon.dev/ui": "workspace:*",
     "@heewon.dev/utils-env": "workspace:*",
-    "next": "15.3.2",
+    "next": "15.5.15",
     "react": "catalog:",
     "react-dom": "catalog:",
     "zod": "catalog:"
